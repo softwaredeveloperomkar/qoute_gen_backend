@@ -13,11 +13,12 @@ app.use(express.json())
 app.get('/',(_,res)=>{
     res.send('root endpoint')
 })
-app.get('/quote/:pass',(req,res)=>{
-    if(req.params.pass == "123"){
-        res.send(generateQuote());
+app.get('/quote',async (req,res)=>{
+    try{
+        res.json(generateQuote());    
+    }catch(err){
+        res.json({message:err});
     }
-    else res.send('Bhag bsdk')
 })
 
 app.listen('4000',()=>{
